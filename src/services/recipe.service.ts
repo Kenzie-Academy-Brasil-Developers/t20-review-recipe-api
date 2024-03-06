@@ -1,12 +1,12 @@
 import { generateId, recipeDatabase } from "../database/database";
 import {
-   IRecipe,
+   TRecipe,
    TRecipeCreateData,
    TRecipeUpdateData,
 } from "../interfaces/recipe.interface";
 
 export class RecipeService {
-   getMany(search?: string): IRecipe[] {
+   getMany(search?: string): TRecipe[] {
       if (search) {
          const searchResults = recipeDatabase.filter((recipe) =>
             recipe.title.toLowerCase().includes(search.toLowerCase())
@@ -18,12 +18,12 @@ export class RecipeService {
       }
    }
 
-   getOne(recipe: IRecipe): IRecipe {  
+   getOne(recipe: TRecipe): TRecipe {  
       return recipe;
    }
 
-   create(body: TRecipeCreateData): IRecipe {
-      const newRecipe: IRecipe = {
+   create(body: TRecipeCreateData): TRecipe {
+      const newRecipe: TRecipe = {
          id: generateId(),
          title: body.title,
          content: body.content,
@@ -35,7 +35,7 @@ export class RecipeService {
       return newRecipe;
    }
 
-   update(currentRecipe: IRecipe, body: TRecipeUpdateData): IRecipe {     
+   update(currentRecipe: TRecipe, body: TRecipeUpdateData): TRecipe {     
       const updatedRecipe = { ...currentRecipe, ...body };
 
       const index = recipeDatabase.findIndex((recipe) => recipe.id === currentRecipe.id);
